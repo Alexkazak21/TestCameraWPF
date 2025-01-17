@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="belazUpBlack.png" />
-    <None Remove="brake.svg" />
-    <None Remove="gasStation.svg" />
     <None Remove="Images\belazDownBlack.png" />
     <None Remove="Images\belazUpBlack.png" />
     <None Remove="Images\BELAZ_PlatformLowered.png" />
@@ -26,7 +23,6 @@
     <None Remove="Images\steeringWheel.svg" />
     <None Remove="Images\thermometer.svg" />
     <None Remove="Images\yawTruck.svg" />
-    <None Remove="oiler.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,19 +71,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ActiproSoftware.Controls.WPF" Version="24.1.4" />
     <PackageReference Include="CalcBinding" Version="2.5.2" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="belazUpBlack.png" />
-    <Resource Include="brake.svg" />
-    <Resource Include="gasStation.svg" />
-    <Resource Include="oiler.svg" />
   </ItemGroup>
 
 </Project>

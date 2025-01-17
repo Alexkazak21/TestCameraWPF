@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace TestCameraWPF.Machine;
 
-public class GearBrushes :INotifyPropertyChanged
+public class GearBackgroundOpacity :INotifyPropertyChanged
 {
     private bool _p1_Opacity = default;
     private bool _p2_Opacity = default;

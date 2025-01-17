@@ -137,9 +137,9 @@
 
                 <!-- Pedal Group -->
                 <Grid>
-                    <ProgressBar Value="45" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="29,84,270,15" Foreground="#FFFAD700"/>
-                    <ProgressBar Value="55" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="49,0,250,15" Foreground="#FFF37575"/>
-                    <ProgressBar Value="76" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="69,0,230,15" Foreground="#FF9EE4AA"/>
+                    <ProgressBar Value="{c:Binding Wheel.Clutch}" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="29,84,270,15" Foreground="#FFFAD700"/>
+                    <ProgressBar Value="{c:Binding Wheel.Brake}" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="49,0,250,15" Foreground="#FFF37575"/>
+                    <ProgressBar Value="{c:Binding Wheel.Acelerator}" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="69,0,230,15" Foreground="#FF9EE4AA"/>
 
                 </Grid>
 

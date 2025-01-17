@@ -11,7 +11,8 @@ public class CamerasSourceModel : INotifyPropertyChanged
     private double _rpm = 0;
     private MachineStateDTO _machineState;
     private ImageSource _imageSource;
-    private GearBrushes _gearBrushes = new GearBrushes();
+    private GearBackgroundOpacity _gearOpacity = new GearBackgroundOpacity();
+    private WheelStatus _wheelStatus = new WheelStatus();
 
 
     public double Speed
@@ -66,15 +67,28 @@ public class CamerasSourceModel : INotifyPropertyChanged
         }
     }
 
-    public GearBrushes GearOpacity
+    public GearBackgroundOpacity GearOpacity
     {
-        get => _gearBrushes;
+        get => _gearOpacity;
         set 
         {
-            if (_gearBrushes != value)
+            if (_gearOpacity != value)
             {
-                _gearBrushes = value;
+                _gearOpacity = value;
                 OnPropertyChanged(nameof(GearOpacity));
+            }
+        }
+    }
+
+    public WheelStatus Wheel
+    {
+        get => _wheelStatus;
+        set
+        {
+            if (value != _wheelStatus)
+            {
+                _wheelStatus = value;
+                OnPropertyChanged(nameof(WheelStatus));
             }
         }
     }

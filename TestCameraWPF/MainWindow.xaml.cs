@@ -33,6 +33,8 @@ namespace TestCameraWPF
             StartSpeedUpdate();
             //StartRPMUpdate();
 
+            
+
                
         }
 
@@ -59,7 +61,7 @@ namespace TestCameraWPF
             speedTimer.Tick += (s, e) =>
             {               
                 this.CamerasSourceModel.RPM = (this.CamerasSourceModel.RPM + 1) % 3001;
-                //this.CamerasSourceModel.IsP1;
+                //this.CamerasSourceModel.Wheel.Acelerator;
             };
             speedTimer.Start();
         }
