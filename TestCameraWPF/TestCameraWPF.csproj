@@ -1,0 +1,93 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="belazUpBlack.png" />
+    <None Remove="brake.svg" />
+    <None Remove="gasStation.svg" />
+    <None Remove="Images\belazDownBlack.png" />
+    <None Remove="Images\belazUpBlack.png" />
+    <None Remove="Images\BELAZ_PlatformLowered.png" />
+    <None Remove="Images\BELAZ_PlatformRaised.png" />
+    <None Remove="Images\boardVoltage.svg" />
+    <None Remove="Images\brake.svg" />
+    <None Remove="Images\gasStation.svg" />
+    <None Remove="Images\oiler.svg" />
+    <None Remove="Images\pitchTruck.svg" />
+    <None Remove="Images\powerVoltage.svg" />
+    <None Remove="Images\rollTruck.svg" />
+    <None Remove="Images\steeringWheel.svg" />
+    <None Remove="Images\thermometer.svg" />
+    <None Remove="Images\yawTruck.svg" />
+    <None Remove="oiler.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\belazDownBlack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\belazUpBlack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\BELAZ_PlatformLowered.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\BELAZ_PlatformRaised.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\boardVoltage.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\brake.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\gasStation.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\oiler.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\pitchTruck.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\powerVoltage.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\rollTruck.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\steeringWheel.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\thermometer.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\yawTruck.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ActiproSoftware.Controls.WPF" Version="24.1.4" />
+    <PackageReference Include="CalcBinding" Version="2.5.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="belazUpBlack.png" />
+    <Resource Include="brake.svg" />
+    <Resource Include="gasStation.svg" />
+    <Resource Include="oiler.svg" />
+  </ItemGroup>
+
+</Project>

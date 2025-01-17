@@ -1,0 +1,361 @@
+﻿<Window
+        x:Class="TestCameraWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestCameraWPF"
+        xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
+        xmlns:gauge1="http://schemas.actiprosoftware.com/winfx/xaml/gauge"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"  
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="220" Width="1450">
+
+    <Window.DataContext>
+        <local:CamerasSourceModel/>
+    </Window.DataContext>
+    <Grid>
+
+
+
+        <Image Source="https://images6.alphacoders.com/568/568500.jpg" Stretch="Fill"/>
+
+
+        <!-- Main grid to transfer in project -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="17.5*"/>
+                <ColumnDefinition Width="17.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.ColumnSpan="7" Background="Gray" Opacity="0.7" >
+
+
+            </StackPanel>
+
+            <!-- Left Block with machine position and tires info-->
+            <Grid Grid.Column="0" VerticalAlignment="Bottom">
+                <!-- First element Machine Roll-->
+                <Image Source="{svgc:SvgImage Source=Images/rollTruck.svg}" Height="20" Width="20" Margin="25,6,95,133">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{c:Binding MachineState.GnssData.Attitude.Roll / 100}"/>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Text="{c:Binding MachineState.GnssData.Attitude.Roll / 100}" Height="20" Margin="60,6,25,133" Foreground="White"/>
+
+                <!-- Second element Machine Pitch-->
+                <Image Source="{svgc:SvgImage Source=Images/pitchTruck.svg}" Height="20" Width="20" Margin="25,27,95,112">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{c:Binding MachineState.GnssData.Attitude.Pitch / 100}"/>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Text="{c:Binding MachineState.GnssData.Attitude.Pitch / 100}" Height="20" Margin="60,27,25,112" Foreground="White"/>
+
+                <!-- Therd element Machine Yaw-->
+                <Image Source="{svgc:SvgImage Source=Images/yawTruck.svg}" Height="20" Width="20" Margin="25,52,95,87" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="{c:Binding (MachineState.GnssData.Attitude.Yaw) / 100}"/>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock Text="{c:Binding MachineState.GnssData.Attitude.Yaw / 100}" Height="20" Margin="60,52,25,87" Foreground="White" FontStretch="Normal"/>
+
+                <Grid Grid.Column="0" VerticalAlignment="Bottom" Height="104" Margin="0,0,0,-20">
+                    <!-- Wheels preasure element group -->
+                    <!-- Front wheels -->
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireFrontRightPressure == 255 ? -1 : MachineState.TirePressure.TireFrontRightPressure', StringFormat=0.0}" Height="13" Width="42" Margin="101,3,13,88" Foreground="White"  TextAlignment="Center"/>
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireFrontLeftPressure == 255 ? -1 : MachineState.TirePressure.TireFrontLeftPressure', StringFormat=0.0}" Height="13" Width="48" Margin="9,3,99,88" Foreground="White"  TextAlignment="Center"/>
+
+                    <!-- Back left wheels -->
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireBackLeftOuterPressure == 255 ? -1 : MachineState.TirePressure.TireBackLeftOuterPressure', StringFormat=0.0}" Height="13" Width="40" Margin="13,47,0,44" Foreground="White" HorizontalAlignment="Left"  TextAlignment="Center"/>
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireBackLeftInnerPressure == 255 ? -1 : MachineState.TirePressure.TireBackLeftInnerPressure', StringFormat=0.0}" Height="13" Width="42" Margin="0,62,81,29" Foreground="White"  HorizontalAlignment="Right"   TextAlignment="Center"/>
+
+                    <!-- Back right wheels -->
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireBackRightInnerPressure == 255 ? -1 : MachineState.TirePressure.TireBackRightInnerPressure', StringFormat=0.0}" Height="13" Width="35" Margin="104,47,0,44" Foreground="White" HorizontalAlignment="Left"   TextAlignment="Center"/>
+                    <TextBlock Text="{c:Binding 'MachineState.TirePressure.TireBackRightOuterPressure == 255 ? -1 : MachineState.TirePressure.TireBackRightOuterPressure', StringFormat=0.0}" Height="13" Width="42" Margin="0,62,34,29" Foreground="White" HorizontalAlignment="Right"   TextAlignment="Center"/>
+
+                    <!-- Machile structure -->
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="62,3,87,91" />
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="87,3,62,91" />
+
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="56,47,93,47" />
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="63,47,86,47" />
+
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="86,47,63,47" />
+                    <Rectangle Height="10" Stroke="White" Width="5" RadiusX="3" RadiusY="3" StrokeThickness="1" Margin="92,47,56,47" />
+
+                    <Canvas  VerticalAlignment="Bottom">
+                        <Line X1="20" Canvas.Left="70" Canvas.Bottom="95" Stroke="White" StrokeThickness="1" HorizontalAlignment="Left" Canvas.Top="-96" VerticalAlignment="Center"  />
+                        <Line X1="18" Canvas.Left="72" Canvas.Bottom="51" Stroke="White" StrokeThickness="1" HorizontalAlignment="Center" Canvas.Top="-50" VerticalAlignment="Center" />
+                        <Line Y1="50" Canvas.Left="80" Canvas.Bottom="51" Stroke="White" StrokeThickness="1" HorizontalAlignment="Left" Height="44" Canvas.Top="-95" VerticalAlignment="Center" />
+                    </Canvas>
+                </Grid>
+
+            </Grid>
+
+            <!-- Wheel Control Info-->
+            <Grid Grid.Column="1" VerticalAlignment="Bottom">
+
+                <!-- Gear Box and Breaks Group-->
+                <Grid>
+                    <Border Height="30" Width="20" BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="110,34,188,105" VerticalAlignment="Bottom">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF9EE4AA" Opacity="{c:Binding GearOpacity.P2_Opacity}"/>
+                        </Border.Background>
+                        <TextBlock Text="P2" TextAlignment="Center" Padding="0,6,0,0" Foreground="White"/>
+                    </Border>
+                    <Border Height="30" Width="20" BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="135,34,161,105" VerticalAlignment="Bottom">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF9EE4AA" Opacity="{c:Binding GearOpacity.P1_Opacity}"/>
+                        </Border.Background>
+                        <TextBlock Text="P1" TextAlignment="Center" Padding="0,6,0,0" Foreground="White"/>
+                    </Border>
+                    <Border Height="30" Width="20" BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="165,34,133,105" VerticalAlignment="Bottom">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF9EE4AA" Opacity="{c:Binding GearOpacity.D_Opacity}"/>
+                        </Border.Background>
+                        <TextBlock Text="D" TextAlignment="Center" Padding="0,6,0,0" Foreground="White"/>
+                    </Border>
+                    <Border Height="30" Width="20" BorderBrush="White" BorderThickness="1" CornerRadius="5" VerticalAlignment="Bottom" Margin="165,0,133,68">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF9EE4AA" Opacity="{c:Binding GearOpacity.N_Opacity}"/>
+                        </Border.Background>
+                        <TextBlock Text="N" TextAlignment="Center" Padding="0,6,0,0" Foreground="White"/>
+                    </Border>
+                    <Border Height="30" Width="20" BorderBrush="White" BorderThickness="1" CornerRadius="5" VerticalAlignment="Bottom" Margin="165,0,133,33">
+                        <Border.Background>
+                            <SolidColorBrush Color="#FF9EE4AA" Opacity="{c:Binding GearOpacity.R_Opacity}"/>
+                        </Border.Background>
+                        <TextBlock Text="R" TextAlignment="Center" Padding="0,6,0,0" Foreground="White"/>
+                    </Border>
+                </Grid>
+
+                <!-- Pedal Group -->
+                <Grid>
+                    <ProgressBar Value="45" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="29,84,270,15" Foreground="#FFFAD700"/>
+                    <ProgressBar Value="55" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="49,0,250,15" Foreground="#FFF37575"/>
+                    <ProgressBar Value="76" Orientation="Vertical" Width="15" Height="70" Background="Transparent" BorderBrush="White" BorderThickness="1" VerticalAlignment="Bottom" Margin="69,0,230,15" Foreground="#FF9EE4AA"/>
+
+                </Grid>
+
+                <!-- Fuel Element -->
+                <Grid>
+                    <ProgressBar Minimum="0" Maximum="100" Height="2" Width="100" Background="Transparent" BorderBrush="Transparent" Margin="80,139,67,18" Value="{c:Binding MachineState.FuelLevel}" Foreground="White"/>
+                    <TextBlock Text="0" Foreground="White"  Width="10" TextAlignment="Center" Margin="80,145,163,8"/>
+                    <TextBlock Text="0.5" Foreground="White" TextAlignment="Center" Margin="149,145,136,8"/>
+                    <TextBlock Text="1" Foreground="White"  Width="10" TextAlignment="Center" Margin="214,145,98,8"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="77,0,160,16"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="166,0,150,16"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="218,0,99,16" />
+                </Grid>
+
+                <Image Source="{svgc:SvgImage Source=Images/gasStation.svg}" Width="20" Height="20" Margin="226,134,76,15"/>
+
+            </Grid>
+
+            <!-- Tachometer elemrnt group -->
+            <Grid  Grid.Column="2" VerticalAlignment="Bottom">
+
+                <lvc:AngularGauge              
+                    Value="{c:Binding MachineState.EngineRevolutions / 100}" 
+                    Height="150"
+                    FromValue="0"
+                    ToValue="30"
+                    LabelsStep="10"
+                    Foreground="White"
+                    Wedge="200"                    
+                    TicksForeground="White"
+                    TicksStep="1"  
+                    NeedleFill="White"
+                    Margin="0,0,0,-45"
+                    TicksStrokeThickness="2"
+                    SectionsInnerRadius=".9">
+
+                    <lvc:AngularGauge.Sections>
+                        <lvc:AngularSection FromValue="20" ToValue="30" Fill="Red"/>
+                    </lvc:AngularGauge.Sections>
+                </lvc:AngularGauge>
+
+                <TextBlock Text="RPM" Foreground="White" FontSize="13" HorizontalAlignment="Center" Margin="0,0,0,75" VerticalAlignment="Bottom"/>
+                <TextBlock Text="{c:Binding MachineState.EngineRevolutions}" Foreground="White" FontSize="30" Height="35" FontWeight="Light" TextAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,45"/>
+            </Grid>
+
+            <!-- Speedometer element group -->
+            <Grid Grid.Column="3" VerticalAlignment="Bottom">
+
+                <lvc:AngularGauge              
+                    Value="{c:Binding MachineState.Velocity}" 
+                    Height="150"
+                    FromValue="0"
+                    ToValue="60"
+                    LabelsStep="10"
+                    Foreground="White"
+                    Wedge="200"                    
+                    TicksForeground="White"
+                    TicksStep="2"  
+                    NeedleFill="White"
+                    Margin="0,0,0,-45"
+                    TicksStrokeThickness="2"
+                    SectionsInnerRadius=".9">
+
+                    <lvc:AngularGauge.Sections>
+                        <lvc:AngularSection FromValue="50" ToValue="60" Fill="Red"/>
+                    </lvc:AngularGauge.Sections>
+                </lvc:AngularGauge>
+
+                <StackPanel HorizontalAlignment="Center"  VerticalAlignment="Bottom" Margin="0,0,0,35">
+                    <TextBlock Text="km/h" Foreground="White" FontSize="12"  Height="13"/>
+                    <TextBlock Text="{c:Binding MachineState.Velocity}" Foreground="White" FontSize="24" FontWeight="Light" Height="30" TextAlignment="Center"  Margin="0,0,0,5"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Temperature Element group -->
+            <Grid Grid.Column="4" VerticalAlignment="Bottom">
+                <Image Source="{svgc:SvgImage Source=Images/thermometer.svg}" Height="20" Width="20" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="10,0,0,10"/>
+
+                <Grid>
+                    <ProgressBar Minimum="-40" Maximum="140" Height="100" Width="2" Background="Transparent" BorderBrush="Transparent" Margin="0,0,20,10" Value="{c:Binding MachineState.CoolantTemperature}" Foreground="White" Orientation="Vertical"/>
+                    <TextBlock Text="-40" Foreground="White" TextAlignment="Center" Margin="32,0,27,3" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="0" Foreground="White" Height="14" Width="10" TextAlignment="Center" VerticalAlignment="Bottom" Margin="36,0,32,27"/>
+                    <TextBlock Text="40" Foreground="White" Height="14" TextAlignment="Center" VerticalAlignment="Bottom" Margin="34,0,30,50"  />
+                    <TextBlock Text="80" Foreground="White" Height="14" TextAlignment="Center" VerticalAlignment="Bottom" Margin="34,0,30,70"  />
+                    <TextBlock Text="120" Foreground="White" Height="14" TextAlignment="Center" VerticalAlignment="Bottom" Margin="34,0,24,95"  />
+
+                    <Line X1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,41,7"  />
+                    <Line X1="3" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,39,19" />
+                    <Line X1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,41,30" />
+                    <Line X1="3" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,39,41" />
+                    <Line X1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,41,52" />
+                    <Line X1="3" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,39,63" />
+                    <Line X1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,41,74" />
+                    <Line X1="3" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,39,86" />
+                    <Line X1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,41,97" />
+                    <Line X1="3" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="2" Width="10" Margin="26,0,39,108" />
+                </Grid>
+            </Grid>
+
+            <!-- Preasure and Voltage Group -->
+            <Grid Grid.Column="5" VerticalAlignment="Bottom">
+                <!-- Brake Preassure group -->
+                <Image Source="{svgc:SvgImage Source=Images/brake.svg}" Height="20" Width="20" Margin="10,10,239,100"/>
+
+                <Grid VerticalAlignment="Bottom">
+                    <ProgressBar Minimum="0" Maximum="200" Height="4" Width="180" Background="Transparent" BorderBrush="Transparent"  Value="{c:Binding MachineState.BrakeOilPressure}" Foreground="White" Margin="51,0,41,114" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="0" Foreground="White"  Width="10" TextAlignment="Center" Margin="46,0,217,98" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="100" Foreground="White" TextAlignment="Center" VerticalAlignment="Bottom" Width="20" Margin="131,0,121,98"/>
+                    <TextBlock Text="200" Foreground="White"  Width="20" TextAlignment="Center" VerticalAlignment="Bottom" Margin="221,0,31,98"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="51,0,219,107" />
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="69,0,201,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="87,0,183,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="105,0,165,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="123,0,146,107"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="141,0,129,107"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="159,0,111,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="177,0,93,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="195,0,75,107"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="213,0,57,107"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="230,0,40,107"/>
+                </Grid>
+
+                <!-- Steering Pressure Group -->
+                <Image Source="{svgc:SvgImage Source=Images/SteeringWheel.svg}" Height="20" Width="20" Margin="10,35,239,75"/>
+
+                <Grid VerticalAlignment="Bottom">
+                    <ProgressBar Minimum="0" Maximum="200" Height="4" Width="180" Background="Transparent" BorderBrush="Transparent"  Value="{c:Binding MachineState.SteeringOilPressure}" Foreground="White" Margin="51,0,41,87" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="0" Foreground="White"  Width="10" TextAlignment="Center" Margin="46,0,217,70" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="100" Foreground="White" TextAlignment="Center" VerticalAlignment="Bottom" Width="20" Margin="137,0,125,70"/>
+                    <TextBlock Text="200" Foreground="White"  Width="20" TextAlignment="Center" VerticalAlignment="Bottom" Margin="226,0,36,70"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="51,0,219,80" />
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="69,0,201,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="87,0,183,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="105,0,165,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="123,0,146,80"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="141,0,129,80"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="159,0,111,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="177,0,93,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="195,0,75,80"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="213,0,57,80"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="230,0,40,80"/>
+                </Grid>
+
+                <!-- Engine Oil Pressure Group -->
+                <Image Source="{svgc:SvgImage Source=Images/oiler.svg}" Height="20" Width="20" Margin="10,62,239,48"/>
+
+                <Grid VerticalAlignment="Bottom">
+                    <ProgressBar Minimum="0" Maximum="10" Height="4" Width="180" Background="Transparent" BorderBrush="Transparent"  Value="{c:Binding MachineState.EngineOilPressure / 10}" Foreground="White" Margin="51,0,41,55" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="0" Foreground="White"  Width="10" TextAlignment="Center" Margin="46,0,217,40" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="5" Foreground="White" TextAlignment="Center" VerticalAlignment="Bottom" Width="20" Margin="137,0,125,40"/>
+                    <TextBlock Text="10" Foreground="White"  Width="20" TextAlignment="Center" VerticalAlignment="Bottom" Margin="226,0,36,40"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="51,0,219,48" />
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="69,0,201,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="87,0,183,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="105,0,165,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="123,0,146,48"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="141,0,129,48"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="159,0,111,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="177,0,93,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="195,0,75,48"/>
+                    <Line Y1="5" Stroke="White" StrokeThickness="1" VerticalAlignment="Bottom" Height="10" Width="2" Margin="213,0,57,48"/>
+
+                    <Line Y1="5" Stroke="White" StrokeThickness="2" VerticalAlignment="Bottom" Height="10" Width="2" Margin="230,0,40,48"/>
+                </Grid>
+
+                <!-- Board voltage group -->
+                <Image Source="{svgc:SvgImage Source=Images/boardVoltage.svg}" Height="20" Width="20" Margin="39,97,210,13"/>
+                <Border CornerRadius="5" BorderBrush="White"  BorderThickness="1" Height="20" Width="30" Margin="69,97,170,13">
+                    <TextBlock Text="{c:Binding 'MachineState.OnBoardNetworkVoltage == 65535 ? -1 : MachineState.OnBoardNetworkVoltage / 10'}" Foreground="White" HorizontalAlignment="Center"/>
+                </Border>
+
+                <!-- Power Voltage group-->
+                <Image Source="{svgc:SvgImage Source=Images/powerVoltage.svg}" Height="20" Width="20" Margin="137,97,100,13"/>
+                <Border CornerRadius="5" BorderBrush="White"  BorderThickness="1" Height="20" Width="50" Margin="174,97,45,13" >
+                    <TextBlock Text="{c:Binding 'MachineState.PowerGridVoltage == 65535 ? -1 : MachineState.PowerGridVoltage'}" Foreground="White" HorizontalAlignment="Center"/>
+                </Border>
+            </Grid>
+
+            <!-- Platform status and Cargo Group -->
+            <Grid  Grid.Column="6" VerticalAlignment="Bottom">
+                <!-- Loaded mass element -->
+                <Border CornerRadius="5" BorderBrush="White" BorderThickness="1" Height="20" Width="100" Margin="0,0,0,150">
+                    <TextBlock Text="{c:Binding 'MachineState.CargoWeight == 65535 ? -1 : MachineState.CargoWeight / 100', StringFormat=0.00 т}" Foreground="White" HorizontalAlignment="Center"/>
+                </Border>
+
+                <Ellipse Stroke="White" StrokeThickness="1" Height="120" Width="120"/>
+
+                <Image Source="{Binding PlatformImageSource}" Height="50" Width="100"/>
+
+                <Border CornerRadius="5" BorderBrush="White" BorderThickness="1" Height="20" Width="100" VerticalAlignment="Bottom">
+                    <TextBlock Text="{c:Binding 'MachineState.PlatformElevationAngle == 255 ? -1 : MachineState.PlatformElevationAngle', StringFormat=0.00°}" Foreground="White" HorizontalAlignment="Center"/>
+                </Border>
+
+
+
+            </Grid>
+        </Grid>
+
+
+
+
+
+    </Grid>
+</Window>
